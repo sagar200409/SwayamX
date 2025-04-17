@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Gallery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-users"></i> PLACE STUDENT GALLERY</h1>
+        <nav>
+            <a href="index.html"><i class="fas fa-calendar-alt"></i> Calendar</a>
+            <a href="students.html"><i class="fas fa-users"></i> Students</a>
+            <a href="admin.html"><i class="fas fa-lock"></i> Admin</a>
+        </nav>
+    </header>
+
+    <main class="animated">
+        <div class="batch-filters">
+            <button class="batch-btn active" data-batch="all">All Batches</button>
+            <button class="batch-btn" data-batch="24-25">2024-25</button>
+            <button class="batch-btn" data-batch="23-24">2023-24</button>
+            <button class="batch-btn" data-batch="22-23">2022-23</button>
+        </div>
+
+        <div class="student-gallery" id="student-gallery">
+            <!-- Students will be loaded here -->
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Filter students by batch
+            document.querySelectorAll('.batch-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.batch-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const batch = this.dataset.batch;
+                    const studentCards = document.querySelectorAll('.student-card');
+                    
+                    studentCards.forEach(card => {
+                        if (batch === 'all' || card.dataset.batch === batch) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

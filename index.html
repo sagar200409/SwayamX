@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Event Calendar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- In index.html, update the header section -->
+<header>
+    <div class="header-top-bar">
+        <div class="header-info">
+            <div class="info-item" id="time">
+                <i class="fas fa-clock"></i>
+                <span class="info-text">Loading...</span>
+            </div>
+            <div class="info-item" id="location">
+                <i class="fas fa-map-marker-alt"></i>
+                <span class="info-text">Avcoe, Sangamner, India</span>
+            </div>
+            <div class="info-item" id="weather">
+                <i class="fas fa-cloud-sun"></i>
+                <span class="info-text">Loading...</span>
+            </div>
+            <div class="info-item" id="notification-toggle">
+        <i class="fas fa-bell"></i>
+        <span class="info-text">Notifications ON</span>
+    </div>
+            <!-- Notification Container -->
+<div id="notification-container" class="notification-container"></div>
+
+<!-- Notification Sound (hidden audio element) -->
+<audio id="notification-sound" preload="auto">
+    <source src="https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3" type="audio/mpeg">
+</audio>
+</div>
+        </div>
+    </div>
+    
+    <div class="header-main">
+        <h1><i class="fas fa-calendar-alt"></i> College Event Calendar</h1>
+        <nav>
+            <a href="index.html"><i class="fas fa-calendar-alt"></i> Calendar</a>
+            <a href="students.html"><i class="fas fa-users"></i> Students</a>
+            <a href="admin.html"><i class="fas fa-lock"></i> Admin</a>
+        </nav>
+    </div>
+</header>
+
+    <main class="animated">
+        <div class="calendar-layout">
+            <div class="calendar-container pulse">
+                <div class="calendar-header">
+                    <button id="prev-month"><i class="fas fa-chevron-left"></i></button>
+                    <h2 id="current-month-year">Month Year</h2>
+                    <button id="next-month"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="calendar-grid" id="calendar-grid">
+                    <!-- Days will be filled by JavaScript -->
+                </div>
+            </div>
+
+            <div class="upcoming-events-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-calendar-check"></i> Upcoming Events</h2>
+                    <div class="panel-decoration">
+                        <div class="decoration-circle blue"></div>
+                        <div class="decoration-circle green"></div>
+                        <div class="decoration-circle orange"></div>
+                    </div>
+                </div>
+                <div id="upcoming-events-list">
+                    <!-- Upcoming events will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Events Modal -->
+        <div class="modal" id="events-modal">
+            <div class="modal-content animated">
+                <span class="close-modal">&times;</span>
+                <h2><i class="fas fa-calendar-day"></i> <span id="modal-date-title">Events for Date</span></h2>
+                <div id="events-list">
+                    <!-- Events will be loaded here -->
+                </div>
+                <p id="no-events-msg"><i class="fas fa-info-circle"></i> No events scheduled for this date.</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+            // Live Time for Sangamner
+    function updateTime() {
+      const indiaTime = new Date().toLocaleString("en-US", {
+        timeZone: "Asia/Kolkata",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true
+      });
+      document.getElementById("time").textContent = "Time: " + indiaTime;
+    }
+    setInterval(updateTime, 1000); // Update time every second
+      // Fetch Weather for Sangamner
+        async function fetchWeather() {
+            const apiKey = "9812a2cd7527c37af7e50ac1e85c981d"; // Replace with your OpenWeatherMap API key
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=Sangamner,IN&units=metric&appid=${apiKey}`;
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                const temp = data.main.temp;
+                const description = data.weather[0].description;
+                document.getElementById("weather").textContent = 
+                    `Weather: ${temp}°C, ${description.charAt(0).toUpperCase() + description.slice(1)}`;
+            } catch (error) {
+                document.getElementById("weather").textContent = "Weather: Unable to fetch data.";
+            }
+        }
+        fetchWeather();
+    </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-tachometer-alt"></i> Admin Dashboard</h1>
+        <nav>
+            <a href="index.html"><i class="fas fa-calendar-alt"></i> Calendar</a>
+            <a href="students.html"><i class="fas fa-users"></i> Students</a>
+            <a href="admin.html"><i class="fas fa-lock"></i> Admin</a>
+        </nav>
+    </header>
+
+    <main class="animated">
+        <div class="admin-tabs">
+            <button class="tab-btn active" data-tab="events"><i class="fas fa-calendar-plus"></i> Manage Events</button>
+            <button class="tab-btn" data-tab="students"><i class="fas fa-user-graduate"></i> Manage Students</button>
+        </div>
+
+        <div id="events" class="tab-content active">
+            <h2><i class="fas fa-plus-circle"></i> Add New Event</h2>
+            <form id="add-event-form">
+                <div class="form-group">
+                    <label for="event-date"><i class="fas fa-calendar-day"></i> Date:</label>
+                    <input type="date" id="event-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-name"><i class="fas fa-heading"></i> Event Name:</label>
+                    <input type="text" id="event-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-summary"><i class="fas fa-align-left"></i> Summary:</label>
+                    <textarea id="event-summary" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="event-image"><i class="fas fa-image"></i> Image (Optional):</label>
+                    <input type="file" id="event-image" accept="image/*">
+                </div>
+                <button type="submit"><i class="fas fa-plus"></i> Add Event</button>
+            </form>
+
+            <h2><i class="fas fa-calendar-check"></i> All Events</h2>
+            <div id="events-folder-view">
+                <!-- Events organized by date -->
+            </div>
+        </div>
+
+        <div id="students" class="tab-content">
+            <h2><i class="fas fa-user-plus"></i> Add New Student</h2>
+            <form id="add-student-form">
+                <div class="form-group">
+                    <label for="student-name"><i class="fas fa-user"></i> Name:</label>
+                    <input type="text" id="student-name" required>
+                </div>
+                <div class="form-group">
+        <label for="student-batch"><i class="fas fa-calendar-alt"></i> Batch:</label>
+        <select id="student-batch" required>
+            <option value="24-25">2024-25</option>
+            <option value="23-24">2023-24</option>
+            <option value="22-23">2022-23</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="student-department"><i class="fas fa-building"></i> Department:</label>
+        <input type="text" id="student-department">
+    </div>
+    <div class="form-group">
+        <label for="student-company"><i class="fas fa-briefcase"></i> Company:</label>
+        <input type="text" id="student-company">
+    </div>
+    <div class="form-group">
+        <label for="student-package"><i class="fas fa-rupee-sign"></i> Package (LPA):</label>
+        <input type="number" id="student-package" step="0.1">
+    </div>
+    <div class="form-group">
+        <label for="student-image"><i class="fas fa-camera"></i> Photo:</label>
+        <input type="file" id="student-image" accept="image/*" required>
+    </div>
+                
+                <button type="submit"><i class="fas fa-plus"></i> Add Student</button>
+            </form>
+
+            <h2><i class="fas fa-users"></i> All Students</h2>
+            <div id="students-list">
+                <!-- Students will be listed here -->
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
